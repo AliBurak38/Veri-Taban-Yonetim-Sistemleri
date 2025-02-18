@@ -20,12 +20,18 @@ Sıralı dosyalardaki bu sorunun önüne geçmek için Doğrudan Erişimli Dosya
 
 
       ---Programın Console Kısmının txt dosyadan alındığı---
+      
 ![ödev 2](https://github.com/user-attachments/assets/3753ea18-6b05-47dd-a009-60f071e48491)
 
 
      ---Dosyaya Eklenmesi istenen bilgiyi Console Kısmına yazdık---
+     
 ![ödev 3](https://github.com/user-attachments/assets/15b926a6-0ff3-4a3a-a750-c593fc43caf1)
 
   
    ---Eklenen Bilginin Txt Dosyasında da görünümü---
+   
 ![ödev 4](https://github.com/user-attachments/assets/9916bf30-2d98-4e1a-96a0-2d690a4352fe)
+
+
+
