@@ -59,7 +59,7 @@ Satır ve sütunlar: Satır ve sütunlar tabloların içinde bulunur bunlar arc�
 
                 ---Burada SQL veri tabanına ait bir tablom var---
                 
-ÖR: ![VERİ](https://github.com/user-attachments/assets/8792bfc1-0939-465e-b474-1dbf10b6a9df)
+![VERİ](https://github.com/user-attachments/assets/8792bfc1-0939-465e-b474-1dbf10b6a9df)
 
 
 
