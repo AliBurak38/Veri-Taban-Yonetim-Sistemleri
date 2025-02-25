@@ -109,4 +109,5 @@ Tablolar: Öğrenci bilgilerini tutulduğu TBLÖĞRENCİ adında 1.Tablo ,Dersle
 
      ----------Sorgu ile ilişkili ıdnin isminin gözükmesi--------- 
 
-  ![sorgu](https://github.com/user-attachments/assets/d9e01a7f-ec69-4a78-b406-21261dff932c)
+![sorgu2](https://github.com/user-attachments/assets/88b54e14-3c03-40f3-9040-831230fc1924)
+
