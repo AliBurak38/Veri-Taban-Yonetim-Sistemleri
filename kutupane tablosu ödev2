@@ -1,0 +1,92 @@
+create database kutuphane; --bir kez database oluşturulurken çalıştırılır.
+
+use Kutuphane -- bu kütüphaneyi kullanarak tablo ekleyebiliriz
+
+1)
+create table adresler(
+adresNo int not null identity(1,1) primary key,
+sehir nvarchar(30),
+cadde nvarchar(30),
+mahalle nvarchar(30),
+bina_No int,
+posta_Kodu int,
+ulke nvarchar(100)
+
+);
+
+2) 
+create table Uyeler(
+Uye_No int not null identity(1,1) primary key,
+Uye_Ad nvarchar(50) not null,
+Uye_Soyad nvarchar(50) not null,
+Telefon nvarchar(20) not null,
+Cinsiyet char(2),
+Eposta nvarchar(100),
+AdresNo int foreign key(adresNo) references adresler(adresNo)
+);
+
+3)
+create table emanet(
+emanet_no int identity(1,1) not null primary key,
+emanet_tarih nvarchar(50),
+teslim_tarih nvarchar(50),
+uye_No int foreign key (uye_No) references Uyeler(Uye_No),
+Kutuphane_No int foreign key (Kutuphane_No) references Kutuphane_t(Kutuphane_No),
+Isbn int foreign key (Isbn) references kitaplar(Isbn)
+
+);
+
+4)
+create table Kutuphane_t (
+Kutuphane_No int identity(1,1) not null primary key,
+Kutuphane_isim nvarchar(100),
+Acıklama nvarchar(150),
+adresNo int  foreign key (adresNo)references adresler(adresNo)
+
+);
+
+5)
+create table kitaplar(
+Isbn int not null primary key,
+Sayfa_Sayisi nvarchar(50),
+Kitap_Adi nvarchar(50),
+Yayin_Tarih nvarchar(50)
+
+);
+
+6)
+create table KitapBulunur(
+Kutuphane_No int foreign key(Kutuphane_No) references Kutuphane(Kutuphane_No),
+ISBN int foreign key(ISBN) references Kitaplar(ISBN),
+Miktar int
+
+);
+7)
+create table Kategoriler(
+Kategori_No int not null identity(1,1) primary key,
+Kategori_Adi nvarchar(100)
+
+);
+8)
+create table KategoriBulunur(
+Id int identity(1,1) not null primary key,
+Kategori_No int foreign key(Kategori_No) references Kategoriler(Kategori_No),
+ISBN int foreign key(ISBN) references Kitaplar(ISBN),
+
+);
+
+
+9)
+create table Yazarlar(
+Yazar_No int not null identity(1,1) primary key,
+Yazar_Ad nvarchar(100) not null,
+Yazar_Soyad nvarchar(100) not null,
+
+);
+10)
+create table KitapYazar(
+Id int identity(1,1) not null primary key,
+ISBN int foreign key(ISBN) references Kitaplar(ISBN),
+Yazar_No int foreign key(Yazar_No) references Yazarlar(Yazar_No)
+
+);
