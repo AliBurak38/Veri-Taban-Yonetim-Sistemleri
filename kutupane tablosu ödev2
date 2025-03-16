@@ -2,7 +2,7 @@ create database kutuphane; --bir kez database oluşturulurken çalıştırılır
 
 use Kutuphane -- bu kütüphaneyi kullanarak tablo ekleyebiliriz
 
-1)
+1)              
 create table adresler(
 adresNo int not null identity(1,1) primary key,
 sehir nvarchar(30),
@@ -14,7 +14,7 @@ ulke nvarchar(100)
 
 );
 
-2) 
+2)    
 create table Uyeler(
 Uye_No int not null identity(1,1) primary key,
 Uye_Ad nvarchar(50) not null,
@@ -22,30 +22,20 @@ Uye_Soyad nvarchar(50) not null,
 Telefon nvarchar(20) not null,
 Cinsiyet char(2),
 Eposta nvarchar(100),
-AdresNo int foreign key(adresNo) references adresler(adresNo)
+AdresNo int foreign key(adresNo) references adresler(adresNo)         -- adresler tablosu ile 1 e n ilişki olduğu için foreign key ekledik
 );
+
 
 3)
-create table emanet(
-emanet_no int identity(1,1) not null primary key,
-emanet_tarih nvarchar(50),
-teslim_tarih nvarchar(50),
-uye_No int foreign key (uye_No) references Uyeler(Uye_No),
-Kutuphane_No int foreign key (Kutuphane_No) references Kutuphane_t(Kutuphane_No),
-Isbn int foreign key (Isbn) references kitaplar(Isbn)
-
-);
-
-4)
 create table Kutuphane_t (
 Kutuphane_No int identity(1,1) not null primary key,
 Kutuphane_isim nvarchar(100),
 Acıklama nvarchar(150),
-adresNo int  foreign key (adresNo)references adresler(adresNo)
+adresNo int  foreign key (adresNo)references adresler(adresNo)         -- adresler tablosu ile 1 e n ilişki olduğu için foreign key ekledik
 
 );
 
-5)
+4)
 create table kitaplar(
 Isbn int not null primary key,
 Sayfa_Sayisi nvarchar(50),
@@ -54,10 +44,21 @@ Yayin_Tarih nvarchar(50)
 
 );
 
+5)
+create table emanet(
+emanet_no int identity(1,1) not null primary key,
+emanet_tarih nvarchar(50),
+teslim_tarih nvarchar(50),
+uye_No int foreign key (uye_No) references Uyeler(Uye_No),                                -- üyeler tablosu ile 1 e n ilişki olduğu için foreign key ekledik
+Kutuphane_No int foreign key (Kutuphane_No) references Kutuphane_t(Kutuphane_No),        -- kütüphane tablosu ile 1 e n ilişki olduğu için foreign key ekledik
+Isbn int foreign key (Isbn) references kitaplar(Isbn)                                    -- kitaplar tablosu ile 1 e n ilişki olduğu için foreign key ekledik
+
+);
+
 6)
 create table KitapBulunur(
-Kutuphane_No int foreign key(Kutuphane_No) references Kutuphane(Kutuphane_No),
-ISBN int foreign key(ISBN) references Kitaplar(ISBN),
+Kutuphane_No int foreign key(Kutuphane_No) references Kutuphane(Kutuphane_No),                -- Kutuphane tablosu ile m e n yani çoka çok ilişki olduğu için ortak bir tablo oluşturduk ve buraya foreign key ekledik.
+ISBN int foreign key(ISBN) references Kitaplar(ISBN),                                          -- Kitaplar tablosu ile m e n yani çoka çok ilişki olduğu için ortak bir tablo oluşturduk ve buraya foreign key ekledik.
 Miktar int
 
 );
@@ -70,8 +71,8 @@ Kategori_Adi nvarchar(100)
 8)
 create table KategoriBulunur(
 Id int identity(1,1) not null primary key,
-Kategori_No int foreign key(Kategori_No) references Kategoriler(Kategori_No),
-ISBN int foreign key(ISBN) references Kitaplar(ISBN),
+Kategori_No int foreign key(Kategori_No) references Kategoriler(Kategori_No),            -- kategoriler tablosu ile 1 e n ilişki oluğu için  foreign key ekledik
+ISBN int foreign key(ISBN) references Kitaplar(ISBN),                                    -- Kitaplar tablosu ile 1 e n ilişki oluğu için  foreign key ekledik
 
 );
 
@@ -85,8 +86,8 @@ Yazar_Soyad nvarchar(100) not null,
 );
 10)
 create table KitapYazar(
-Id int identity(1,1) not null primary key,
-ISBN int foreign key(ISBN) references Kitaplar(ISBN),
-Yazar_No int foreign key(Yazar_No) references Yazarlar(Yazar_No)
+Id int identity(1,1) not null primary key,     
+ISBN int foreign key(ISBN) references Kitaplar(ISBN),                  -- Kitaplar tablosu ile m e n  yani çoka çok ilişki oluğu için  ayrı bir tablo oluşturup  foreign key ekledik
+Yazar_No int foreign key(Yazar_No) references Yazarlar(Yazar_No)        -- Yazarlar tablosu ile m e n  yani çoka çok ilişki oluğu için  ayrı bir tablo oluşturup  foreign key ekledik
 
 );
