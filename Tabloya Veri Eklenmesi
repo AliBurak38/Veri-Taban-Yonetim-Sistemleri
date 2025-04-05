@@ -1,0 +1,151 @@
+
+--Adresler Tablosuna 10 adet veri Eklendi--
+select * from adresler 
+ insert into Adresler values ('Kayseri','30 Agustos Bulvarı','Erciyesevler Mahallesi',15,38,'Türkiye')
+ insert into Adresler values ('Amasya','İsyasyon Caddesi','Akbilek Mahallesi',45,05,'Türkiye')
+ insert into Adresler values ('İstanbul','100.Yıl Caddesi','Atakent',36,34,'Türkiye')
+ insert into Adresler values('Bayburt','Cumhuriyet Caddesi','Tuzcuzade Mahallesi',22,69,'Türkiye')
+
+insert into Adresler values ('Kayseri','1882.Sokak','Gökkent Mahallesi',55,38,'Türkiye')
+
+insert  into Adresler values('Yozgat','İstiklal Caddesi','Çamlık Mahallesi',14,66,'Türkiye')
+
+insert into  Adresler values('Ankara','Hacı Sokak','Seyranbağları Mahallesi',30,06,'Türkiye')
+
+insert into  Adresler values('Samsun','Cumhuriyet Caddesi','Gülçiçek Mahallesi',32,55,'Türkiye')
+
+insert into  Adresler values('Antalya','Portakal Caddesi','Fatih Mahallesi',68,07,'Türkiye')
+
+insert into  Adresler values('Yozgat','Ayyıldız Caddesi','Kılıç Mahallesi',52,66,'Türkiye')
+
+update Adresler set Cadde='İstasyon Caddesi' where Adres_No=2
+
+
+
+
+--Kitaplar Tablosuna 10 adet veri Eklendi--
+
+select *from Kitaplar
+
+insert into Kitaplar values (42,200,'Dedemin Bakkalı','15 Kasım 2016')
+update Kitaplar set Sayfa_Sayisi=200 where ISBN=20
+
+insert into Kitaplar values (12,152,'Para Ağacı','23 Aralık 2022')
+insert into Kitaplar values (35,362,'Martin Eden','27 Mart 2014')
+insert into Kitaplar values (27,152,'Hayvan Ciftligi','17 Agustos 1945')
+insert into Kitaplar values(14,116,'Fareler ve İnsanlar','7 Nisan 1937')
+insert into Kitaplar values (72,256,'Beyaz Dis','20 Ekim 1910')
+insert into Kitaplar values (98,384,'Calıkusu','14 Ocak 1986')
+insert into Kitaplar values (56,180,'Beyaz Gemi','2 Haziran 2021')
+insert into Kitaplar values (87,264,'Seksen Gunde Devrialem','3 Nisan 2022')
+insert into Kitaplar values (43,185,'Dunyanın Ucundaki Fener','28 Mayıs 2021')
+
+
+--Kutuphane Tablosuna 10 adet veri Eklendi--
+
+select *from Kutuphane
+
+insert into Kutuphane values('Gevher Nesibe Kütüphanesi','Calisma bilgisayarları ve fazla ogrenci kapasitesi vardır',1)
+insert into Kutuphane values('Amasya Üniversitesi Cocuk Kutuphanesi','Cocuklar icin hem egitici hem eglencelidir.',2)
+insert into Kutuphane values('Rami Kütüphanesi','4200 kişi oturma ve 2,5 milyon adet kitap kapasitesine sahiptir.',3)
+insert into Kutuphane values('Bayburt İl Halk Kütüphanesi ','',4)
+insert into Kutuphane values('Kayseri 75. Yıl İl Halk Kütüphanesi','Herkes icin uygundur.',5)
+insert into Kutuphane values ('Yozgat Halk Kutuphanesi','Kutuphanemiz yozgatın merkezinde herkesin ulasabileceği konumdadır',6)
+insert into Kutuphane values ('Adnan Ötüken İl Halk Kütüphanesi','Kutuphanemiz cok eski tarihi bir kutuphanedir.',7)
+insert into Kutuphane values ('Cingöz Kutuphane Kafe','Kutuphane ile kafeyi birleştirdik ve bu sayede genclerin ilgisini cektik',8)
+insert into Kutuphane values ('Uyanık Kutuphane Antalya ','Kutuphanemiz gece gündüz acıktır bu sayede herkes istedigi zaman calısabilecek',9)
+insert into Kutuphane values ('Bozok Üniversitesi Merkezi Kütüphane ','Kutuphanemiz universite kampusu icindedir.',10)
+
+--KitapBulunur Tablosuna 10 adet veri Eklendi--
+
+select *from KitapBulunur
+
+insert into KitapBulunur values (1,72,500)
+insert into KitapBulunur values (2,14,367)
+insert into KitapBulunur values (3,98,221)
+insert into KitapBulunur values (4,87,156)
+insert into KitapBulunur values (5,20,674)
+insert into KitapBulunur values (6,56,115)
+insert into KitapBulunur values (7,12,205)
+insert into KitapBulunur values (8,27,184)
+insert into KitapBulunur values (9,35,134)
+insert into KitapBulunur values (10,43,179)
+
+
+--Üyeler Tablosuna 10 adet veri Eklendi--
+select *from Üyeler
+
+insert into Üyeler values('Ali Burak','Öztürk','E','5543227890','burak21@mail.com',5)
+insert into Üyeler values('Mehmet','Kılıc','E','5553557595','mehmet@mail.com',7)
+insert into Üyeler values('Yaren','Yüksel','K','5333337393','yaren05@mail.com',2)
+insert into Üyeler values('Azra ','Keskin','K','5223227292','azra09@mail.com',9)
+insert into Üyeler values('Murat','Yılmaz','E','5543227890','murat34@mail.com',3)
+insert into Üyeler values('Ayşe','Genc','K','5563667666','ayse38@mail.com',1)
+insert into Üyeler values('Hacı','Ulutürk','E','599997999','hacı@mail.com',4)
+insert into Üyeler values('Beyza','Yılmaz','K','5503020800','beyza66@mail.com',6)
+insert into Üyeler values('Ali','Can','E','5883828880','can55@mail.com',8)
+insert into Üyeler values('Elif','Eylül','K','5511127190','elif66@mail.com',10)
+
+--Yazarlar Tablosuna 10 adet veri Eklendi--
+
+select *from Yazarlar
+insert into Yazarlar values('Şermin','Yaşar')
+insert into Yazarlar values('John','Steinbeck')
+insert into Yazarlar values('George','Orwell')
+insert into Yazarlar values('Jack','London')
+insert into Yazarlar values('Jules','Verne')
+insert into Yazarlar values('Cengiz','Aytmatov')
+insert into Yazarlar values('Reşat Nuri','Güntekin')
+
+--KitapYazar Tablosuna 10 adet veri Eklendi--
+
+select *from KitapYazar
+insert into KitapYazar values(12,1)
+insert into KitapYazar values(14,2)
+insert into KitapYazar values(20,1)
+insert into KitapYazar values(27,3)
+insert into KitapYazar values(35,4)
+insert into KitapYazar values(43,5)
+insert into KitapYazar values(56,6)
+insert into KitapYazar values(72,4)
+insert into KitapYazar values(87,5)
+insert into KitapYazar values(98,7)
+
+
+--Kategoriler Tablosuna 10 adet veri Eklendi--
+
+select *from Kategoriler
+insert into Kategoriler values('Çocuk Edebiyatı')
+insert into Kategoriler values('Roman')
+insert into Kategoriler values('Deneme')
+insert into Kategoriler values('Edebiyat')
+insert into Kategoriler values('Anı')
+insert into Kategoriler values('Bilim kurgu')
+
+--KategoriBulunur Tablosuna 10 adet veri Eklendi--
+
+select *from KategoriBulunur
+insert into KategoriBulunur values(1,12)
+insert into KategoriBulunur values(2,14)
+insert into KategoriBulunur values(1,20)
+insert into KategoriBulunur values(2,27)
+insert into KategoriBulunur values(2,35)
+insert into KategoriBulunur values(2,43)
+insert into KategoriBulunur values(2,56)
+insert into KategoriBulunur values(2,72)
+insert into KategoriBulunur values(2,87)
+insert into KategoriBulunur values(2,98)
+
+--Emanet Tablosuna 10 adet veri Eklendi--
+
+select *from Emanet
+insert into Emanet values('20 Mart 2025','4 Nisan 2025',2,1,87)
+insert into Emanet values('12 Şubat 2025','28 Mart 2025',7,3,98)
+insert into Emanet values('2 Şubat 2025','1 Nisan 2025',1,8,14)
+insert into Emanet values('19 Ocak 2025','19 Mart 2025',10,7,27)
+insert into Emanet values('17 Mart 2025','5 Nisan 2025',3,5,35)
+insert into Emanet values('12 Aralık 2024','7 Ocak 2025',4,2,43)
+insert into Emanet values('27 Şubat 2025','2 Nisan 2025',5,4,56)
+insert into Emanet values('22 Mart 2025','5 Nisan 2025',6,6,72)
+insert into Emanet values('27 Aralık 2024','20 Ocak 2025',8,10,20)
+insert into Emanet values('2 Mart 2025','2 Nisan 2025',9,9,12)
