@@ -1,0 +1,73 @@
+create database galeri
+
+use galeri
+
+create table Musteri(
+Mno int primary key identity(1,1),
+M_Ad nvarchar(50),
+M_Soyad nvarchar(50),
+M_Adres nvarchar(50),
+M_Telefon int
+
+);
+
+create table Arac(
+A_No int primary key identity(1,1),
+Model int,
+Marka nvarchar(100),
+Plaka nvarchar(100),
+Fiyat int 
+
+);
+
+create table Satis(
+Sat_No int primary key identity(1,1),
+Mno int foreign key (Mno) references Musteri(Mno),
+A_No int foreign key (A_No) references Arac(A_No),
+Sat_Tarih nvarchar(100),
+S_Fiyat int
+
+);
+
+create table Alım(
+AlimNo int primary key identity(1,1),
+Mno int foreign key (Mno) references Musteri(Mno),
+A_No int foreign key (A_No) references Arac(A_No),
+Alim_Tarih nvarchar(100),
+Alim_Fiyat int
+
+
+
+);
+
+
+insert into Musteri values('Ali Burak','Öztürk','Kayseri',553);
+
+insert into Musteri values('Murat','Kılıc','Adana',551);
+
+
+insert into Musteri values('Ayşe','Çiğdem','Amasya',532);
+
+select *from Musteri
+
+
+insert into Arac values('2022','Fiat Egea','05 ADR 948',840.000)
+
+insert into Arac values('2020','Toyota Corolla','38 HD 898',800.000)
+
+insert into Arac values('2017','Ford Courier','06 AGN 895',840.000)
+
+select *from Arac
+
+insert into Satis values(3,1,'22.04.2025',882.000)
+insert into Satis values(4,2,'15.03.2025',856.000)
+insert into Satis values(5,3,'13.02.2025',912.000)
+select *from Satis
+
+insert into Alım values(5,1,'25.12.2024',710)
+
+insert into Alım values(3,2,'15.10.2024',680)
+
+insert into Alım values(4,3,'12.08.2024',650),
+
+select *from Alım
