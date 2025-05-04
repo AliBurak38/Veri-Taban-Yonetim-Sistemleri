@@ -1,73 +1,128 @@
-create database galeri
+create database galeri;
 
-use galeri
-
-create table Musteri(
-Mno int primary key identity(1,1),
-M_Ad nvarchar(50),
-M_Soyad nvarchar(50),
+create table Müsteri(
+M_No int not null primary key identity(1,1),
+M_Adi nvarchar(50),
+M_Soyadi  nvarchar(50),
 M_Adres nvarchar(50),
-M_Telefon int
-
+M_Telefon nvarchar(100)
 );
+
 
 create table Arac(
-A_No int primary key identity(1,1),
-Model int,
-Marka nvarchar(100),
+Arac_No int not null primary key identity(1,1),
+Yıl int,
+Marka  nvarchar(50),
+Model nvarchar(50),
 Plaka nvarchar(100),
-Fiyat int 
-
+Fiyat nvarchar(50)
 );
 
-create table Satis(
-Sat_No int primary key identity(1,1),
-Mno int foreign key (Mno) references Musteri(Mno),
-A_No int foreign key (A_No) references Arac(A_No),
-Sat_Tarih nvarchar(100),
-S_Fiyat int
-
+create table Satış(
+Sat_No int not null primary key identity(1,1),
+M_No int foreign key(M_No) references Müsteri(M_No),
+Arac_No int foreign key(Arac_No) references Arac(Arac_No),
+Sat_Tarih nvarchar(50),
+Sat_Fiyat int
 );
 
 create table Alım(
-AlimNo int primary key identity(1,1),
-Mno int foreign key (Mno) references Musteri(Mno),
-A_No int foreign key (A_No) references Arac(A_No),
-Alim_Tarih nvarchar(100),
+Alim_No int not null primary key identity(1,1),
+M_No int foreign key(M_No) references Müsteri(M_No),
+Arac_No int foreign key(Arac_No) references Arac(Arac_No),
+Alim_Tarih nvarchar(50),
 Alim_Fiyat int
-
-
-
 );
 
 
-insert into Musteri values('Ali Burak','Öztürk','Kayseri',553);
 
-insert into Musteri values('Murat','Kılıc','Adana',551);
+insert into Müsteri values('Ali Burak','Öztürk','Kayseri/Kocasinan','1456789054')
+insert into Müsteri values('Ayşe','Kılıç','Yozgat/Sorgun','168782052')
+insert into Müsteri values('Ahmet','Candan','Tokat/Turhal','146787074')
+insert into Müsteri values('Murat','Kara','Tokat/Turhal','1456889959')
+insert into Müsteri values('Yaren','Gül','İstanbul/Beşiktaş','1256282052')
+insert into Müsteri values('Ali','Yılmaz','Tokat/Zile','1858789858')
+insert into Müsteri values('Elif','Kurt','Sivas/Şarkışla','1451719151')
 
 
-insert into Musteri values('Ayşe','Çiğdem','Amasya',532);
-
-select *from Musteri
 
 
-insert into Arac values('2022','Fiat Egea','05 ADR 948',840.000)
+insert into Arac values ('2022','Fiat','Egea','05 BPVY 3338','820.000');
+insert into Arac values ('2020','Toyota','Corolla','38 BPTY 3838','922.000');
+insert into Arac values ('2021','Ford','Courier','05 BPAY 3232','750.000');
+insert into Arac values ('2017','BMW','520d','38 ALIB 2220','1.200.000');
+insert into Arac values ('2015','Fiat','Linea','07 KLCY 3507','480.000');
 
-insert into Arac values('2020','Toyota Corolla','38 HD 898',800.000)
 
-insert into Arac values('2017','Ford Courier','06 AGN 895',840.000)
 
-select *from Arac
 
-insert into Satis values(3,1,'22.04.2025',882.000)
-insert into Satis values(4,2,'15.03.2025',856.000)
-insert into Satis values(5,3,'13.02.2025',912.000)
-select *from Satis
+insert into Alım values('1','5','15.01.2025','420000')
+insert into Alım values('4','3','11.01.2025','720000')
+insert into Alım values('5','2','22.12.2024','885000')
+insert into Alım values('6','4','11.11.2024','1000000')
+insert into Alım values('7','1','20.02.2025','785000')
 
-insert into Alım values(5,1,'25.12.2024',710)
 
-insert into Alım values(3,2,'15.10.2024',680)
 
-insert into Alım values(4,3,'12.08.2024',650),
+insert into Satış values('1','4','27.12.2024','1150000')
+insert into Satış values('4','5','20.02.2025','465000')
+insert into Satış values('3','1','12.03.2025','810000')
+insert into Satış values('6','2','01.02.2025','918000')
 
-select *from Alım
+
+               ----Sorular-----
+
+--1.Soru: Satış yapılan müşterilerin isimlerini listelemek için gerekli kodu yazınız? 
+
+select s.Sat_No,m.M_Adi,m.M_Soyadi from Satış as s join Müsteri as m on s.M_No=m.M_No
+
+
+--2.Soru:Hangi müşteriden hangi aracın alındığını listelemek için gerekli kodu yazınız?
+
+select a.Alim_No,m.M_Adi+' '+m.M_Soyadi'Musteri AdSoyad',c.Marka+' '+c.Model 'Arac MarkaModel' from Alım as a join Müsteri as m on a.M_No=m.M_No join Arac as c on a.Arac_No=c.Arac_No
+
+
+--3.Soru:Her bir müşteriden alınan araçların sayısını listelemek için gerekli kodu yazınız?
+
+select Count(Alim_No)from Alım
+
+
+--4.Soru:Satılan araçların marka ve modelini listelemek için gerekli kodu yazınız?
+
+select s.Sat_No,a.Marka+' '+a.Model 'Arac Marka Model' from Satış as s join Arac as a on s.Arac_No=a.Arac_No
+
+
+--5.Soru:Toplam satış ve toplam alım tutarlarını ve bunların farkını bulan kodu yazınız?
+
+Select (SELECT SUM(Alim_Fiyat) FROM Alım) - (SELECT SUM(Sat_Fiyat) FROM Satış) AS KarTutar;
+
+
+--7.Soru: Her aracın ortalama satış fiyatını bulan kodu yazınız?
+select AVG(Sat_Fiyat)from Satış 
+
+
+--6.Soru: Hiç satışı yapılmamış araçları listelemek için gerekli kodu yazınız ?
+
+select *from Alım as a Left JOIN Satış as s on a.Arac_No = s.Arac_No where s.Arac_No IS NULL;
+
+
+--7.Soru: Her aracın ortalama satış fiyatını bulan kodu yazınız?
+select AVG(Sat_Fiyat)from Satış 
+
+--8.Soru: Alımı ve satışı yapılan tüm araçların marka,model ve alım-satış sayısını listelemek için gerekli kodu yazınız ?
+
+select  c.Marka,c.model  from Alım as a join Arac as c on c.Arac_No=a.Arac_No --alımı yapılan araba markaları 
+
+select  c.Marka,c.model  from Satış as s join Arac as c on c.Arac_No=s.Arac_No --satışı yapılan araba markaları 
+
+select  Count(Alim_No) from Alım -- alımı yapılan araba sayısı
+
+select  Count(Sat_No) from Satış -- satışı yapılan araba sayısı
+
+--9.Soru: 200000 den fazla tutara satılan araçları kimlerin hangi aracı aldığını listelemek için gerekli kodu yazınız?
+ 
+select c.Marka,c.model,m.M_Adi,m.M_Soyadi from Satış as s join Arac as c on c.Arac_No=s.Arac_No join Müsteri as m on m.M_No=s.M_No where Sat_Fiyat>200000
+
+--10.Soru: Tokatta bulunan müşterilere satışı ytapılan araçları listelemek için gerekli kodu yazınız?
+
+ select *from Satış as s join Müsteri as m on m.M_No=s.M_No join Arac as c on s.M_No=m.M_No where M_Adres='Tokat/Turhal'
