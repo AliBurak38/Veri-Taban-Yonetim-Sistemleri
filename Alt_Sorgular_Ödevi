@@ -1,0 +1,111 @@
+create  database alt_sorgular
+
+use alt_sorgular
+
+create table Müsteri(
+M_No int not null primary key identity(1,1),
+M_Adi nvarchar(50),
+M_Soyadi  nvarchar(50),
+M_Adres nvarchar(50),
+M_Telefon nvarchar(100)
+);
+
+create table Arac(
+Arac_No int not null primary key identity(1,1),
+Yıl int,
+Marka  nvarchar(50),
+Model nvarchar(50),
+Plaka nvarchar(100),
+Fiyat nvarchar(50)
+);
+
+
+create table Satış(
+Sat_No int not null primary key identity(1,1),
+M_No int foreign key(M_No) references Müsteri(M_No),
+Arac_No int foreign key(Arac_No) references Arac(Arac_No),
+Sat_Tarih nvarchar(50),
+Sat_Fiyat int
+);
+
+create table Alım(
+Alim_No int not null primary key identity(1,1),
+M_No int foreign key(M_No) references Müsteri(M_No),
+Arac_No int foreign key(Arac_No) references Arac(Arac_No),
+Alim_Tarih nvarchar(50),
+Alim_Fiyat int
+);
+
+
+
+insert into Müsteri values('Turgut','Özseven','Turhal/Tokat','121646516416')
+insert into Müsteri values('Mustafa','Çağlayan','Meram/Konya','465245212323')
+insert into Müsteri values('Ahmet','Kara','Zile/Tokat','472376298362')
+insert into Müsteri values('Murat','Beyaz','Turhal/Tokat','385235293859')
+insert into Müsteri values('Elif','Kurt','Beşiktaş/İstanbul','948752835293')
+insert into Müsteri values('Ayşe','Uçar','Taşova/Amasya','487394698292')
+insert into Müsteri values('Bülent','Ayar','Turhal/Tokat','232378572352')
+
+
+insert into Arac values ('2004','Fiat','Marea','38 VTYS 3838','100000');
+insert into Arac values ('2020','Renault','Megane','38 VTYS 3839','110000');
+insert into Arac values ('2010','Ford','Focus','38 VTYS 3840','120000');
+insert into Arac values ('2023','Volkswagen','Golf','38 VTYS 3841','250000');
+insert into Arac values ('2000','Opel','Astra','38 VTYS 3842','82000');
+
+
+
+                 ---Sorular---
+
+1.Soru: Turgut özsevene satılan aracın aynısından başka hangi müşterilere satıldığını bulan sorguyu yazınız?
+
+select  m2.M_Adi+' '+ m2.M_Soyadi 'Musteri Ad Soyad' from Satış as s2 join Müsteri  m2 on s2.M_No=m2.M_No where s2.Arac_No=(select  s.Arac_No  from Satış  as s join Müsteri  as m on s.M_No=m.M_No where m.M_Adi='Turgut')
+
+
+2.Soru: Satışı yapılan araçları listelemek için gerekli sorguyu yazınız?
+
+select a.Marka,a.Model from  Satış as s  join Arac as a on s.Arac_No=a.Arac_No 
+
+3.Soru: satış fiyatı alış fiyatından düşük olan araçları listeleyen sorguyu yazınız? 
+
+select *from Alım as a join Satış as s on a.Arac_No=(s.Arac_No join Müsteri as m on m.M_No=s.M_No where s.Sat_Fiyat<a.Alim_Fiyat)
+
+
+4.Soru:Opel marka araç yapılan satışların ve alımların hangi müşterilere yapıldığını bulan sorguyu yazınız?
+
+--Satışı yapılan opel araçlar
+select *from Satış as s where s.Arac_No=(select Arac.Arac_No from Arac where Arac.Marka='Opel')
+
+--Alımı yapılan Opel Araçlar 
+select  m.M_Adi,m.M_Soyadi from Alım as al join Müsteri as m on m.M_No=al.M_No where al.Arac_No=(select  a.Arac_No from Arac as a where a.Marka='Opel')
+
+5.Soru:Araç fiyatı 200000 den yüksek olan araçların hangi fiyata satıldğını bulan sorguyu yazınız? 
+
+select s.Sat_Fiyat,a.Marka,a.Model from  Satış as s  join Arac as a on s.Arac_No=a.Arac_No  where s.Arac_No in (select a.Arac_No from Arac as a where a.Fiyat>'200000')
+
+6.Soru:Turhal ve Amasyaya yapılan satışların toplam tutarını azalan sırada listeleyen sorguyu yazınız?
+
+select  s.Sat_Fiyat  from Satış as s join Müsteri as m on m.M_No=s.M_No where m.M_Adres='Tasova/Amasya' or m.M_Adres='Turhal/Tokat' order by s.Sat_Fiyat desc 
+
+7.Soru:Satış veya alımı yapılmayan müşterileri bulan sorguyu yazınız?
+
+-- Araç Satılmayan müşteriler--
+
+select *from Müsteri as m where m.M_No not in (select Satış.M_No from  Satış )
+
+--Araç alınmayan müşteriler--
+
+select *from Müsteri as m where m.M_No not in (select Alım.M_No from Alım)
+
+8.Soru= 5.ve 6.ayda yapılan satışların kimlere olduğunu bulan sorguyu yazınız?
+
+select m.M_Adi+' '+m.M_Soyadi 'AdSoyad'from Müsteri as m  where  m.M_No in(select Satış.M_No from  Satış where Sat_Tarih='04.05.2022' or Sat_Tarih='01.06.2020')
+
+9.Soru:aynı marka araç alan müşterileri listeleyen sorguyu yazınız?
+
+SELECT s.Arac_NoFROM Alım s GROUP BY s.Arac_No HAVING COUNT(DISTINCT s.M_No) > 1;
+
+10.Soru=En yüksek fiyata satılan aracın bilgilerini kime satıldığını bulan sorguyu yazınız?
+
+select a.Marka,a.model,m.M_Adi,m.M_Soyadi ,s.Sat_Fiyat AS 'En Yüksege satılan arac fiyatı ' from  Satış as s join Arac as a on s.Arac_No=a.Arac_No join Müsteri as m on m.M_No=s.M_No where s.Sat_Fiyat=
+( select Max(s.Sat_Fiyat)'En Yüksege satılan arac fiyatı ' from Satış as s)
